@@ -1,48 +1,356 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>个人简历</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的主页 - 个人简历</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background-color: #faf9f5;
+    color: #2c2c2c;
+    line-height: 1.7;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 30px 40px 60px;
+  }
+
+  /* 顶部导航 */
+  .site-title {
+    font-size: 18px;
+    color: #1f3d33;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-bottom: 50px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e4e1d8;
+  }
+
+  .nav a {
+    text-decoration: none;
+    color: #3a3a3a;
+    font-size: 15px;
+    transition: color 0.2s;
+  }
+
+  .nav a:hover {
+    color: #1f3d33;
+    text-decoration: underline;
+  }
+
+  /* 个人介绍区 */
+  .profile-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+
+  .profile-text {
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .name {
+    font-size: 42px;
+    font-weight: 700;
+    color: #1f3d33;
+    margin-bottom: 6px;
+  }
+
+  .name-en {
+    font-size: 22px;
+    color: #6b6b6b;
+    font-weight: 400;
+    margin-left: 10px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: #444;
+    margin: 14px 0 22px;
+  }
+
+  .school-class {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 26px;
+  }
+
+  .info-list {
+    list-style: none;
+  }
+
+  .info-list li {
+    margin-bottom: 18px;
+    font-size: 15px;
+  }
+
+  .info-label {
+    display: block;
+    color: #1f3d33;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .info-value {
+    color: #333;
+  }
+
+  /* 头像 */
+  .avatar {
+    width: 160px;
+    height: 160px;
+    background-color: #eef0e9;
+    border: 1px solid #e0ded4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* 板块通用样式 */
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    background-color: #eef2ec;
+    padding: 14px 20px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f3d33;
+    border-left: 5px solid #b08d57;
+    margin-bottom: 20px;
+  }
+
+  .section-content {
+    padding: 0 4px;
+  }
+
+  .item {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e8e6dd;
+  }
+
+  .item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .item-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f3d33;
+    margin-bottom: 8px;
+  }
+
+  .item-title .tag {
+    font-weight: 400;
+    color: #777;
+    margin-left: 8px;
+    font-size: 14px;
+  }
+
+  .item-desc {
+    font-size: 15px;
+    color: #444;
+  }
+
+  /* 技能列表 */
+  .skill-list {
+    list-style: disc;
+    padding-left: 24px;
+  }
+
+  .skill-list li {
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #333;
+  }
+
+  .skill-list li strong {
+    color: #1f3d33;
+  }
+
+  /* 作品门户 */
+  .works-note {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+  }
+
+  .work-card {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #e4e1d8;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s;
+  }
+
+  .work-card:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    border-color: #b08d57;
+  }
+
+  .work-thumb {
+    width: 100%;
+    height: 120px;
+    background-color: #eef0e9;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 13px;
+  }
+
+  .work-name {
+    font-size: 14px;
+    color: #1f3d33;
+    font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 20px; }
+    .name { font-size: 32px; }
+    .profile-header { gap: 24px; }
+    .avatar { width: 130px; height: 130px; }
+  }
+</style>
 </head>
 <body>
+<div class="container">
 
-    <h1 align="center">个 人 简 历</h1>
-    <hr>
+  <!-- 顶部导航 -->
+  <div class="site-title">我的主页</div>
+  <nav class="nav">
+    <a href="#about">关于</a>
+    <a href="#experience">经历</a>
+    <a href="#research">科研</a>
+    <a href="#skills">技能</a>
+    <a href="#works">作品</a>
+    <a href="#teaching">教学</a>
+    <a href="#achievements">成果</a>
+  </nav>
 
-    <h2>基本信息</h2>
-    <table border="1" cellpadding="8" cellspacing="0">
-        <tr>
-            <td>姓名</td>
-            <td>陈锦谊</td>
-            <td>性别</td>
-            <td>男</td>
-        </tr>
-        <tr>
-            <td>年龄</td>
-            <td>20</td>
-            <td>民族</td>
-            <td>汉族</td>
-        </tr>
-        <tr>
-            <td>电话</td>
-            <td>138-0000-0000</td>
-            <td>邮箱</td>
-            <td>zhangsan@qq.com</td>
-        </tr>
-        <tr>
-            <td>住址</td>
-            <td colspan="3">广东市某某大学宿舍</td>
-        </tr>
-    </table>
+  <!-- 个人介绍 -->
+  <header class="profile-header" id="about">
+    <div class="profile-text">
+      <h1 class="name">陈锦谊 <span class="name-en">Michael</span></h1>
+      <p class="subtitle">软件技术专业学生 · 前端开发学习者</p>
+      <p class="school-class">我的学校：广东科学技术职业学院<br>我的班级：大模型应用产业学院班</p>
 
-    <h2>教育经历</h2>
-    <p>2023年9月 — 至今　某某大学　计算机专业　专科在读</p>
+      <ul class="info-list">
+        <li>
+          <span class="info-label">学习方向</span>
+          <span class="info-value">HTML5、CSS3、JavaScript，正在学习 Git、数据库与网站部署。</span>
+        </li>
+        <li>
+          <span class="info-label">学习阶段</span>
+          <span class="info-value">在校学习</span>
+        </li>
+        <li>
+          <span class="info-label">所在城市</span>
+          <span class="info-value">珠海</span>
+        </li>
+        <li>
+          <span class="info-label">联系</span>
+          <span class="info-value">18719154298</span>
+        </li>
+      </ul>
+    </div>
 
-    <h2>兴趣爱好</h2>
-    <p>看书、打篮球、听音乐</p>
+    <div class="avatar">
+      <img src="OIP-C.webp" alt="陈锦谊">
+    </div>
+  </header>
 
-    <h2>自我评价</h2>
-    <p>本人性格开朗，学习认真，乐于助人</p>
+  <!-- 教育与工作经历 -->
+  <section class="section" id="experience">
+    <h2 class="section-title">教育与工作经历</h2>
+    <div class="section-content">
+      <div class="item">
+        <div class="item-title">广东科学技术职业学院人工智能技术应用专业 <span class="tag">在读</span></div>
+        <div class="item-desc">学习网页开发，用项目记录成长。</div>
+      </div>
+    </div>
+  </section>
 
+  <!-- 项目经历 -->
+  <section class="section">
+    <h2 class="section-title">项目经历</h2>
+    <div class="section-content">
+      <div class="item">
+        <div class="item-title">课程练习 个人主页</div>
+        <div class="item-desc">项目内容：制作自己的网页，展示资料与作品，记录修改、测试与发布过程。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 技能与实践 -->
+  <section class="section" id="skills">
+    <h2 class="section-title">技能与实践</h2>
+    <div class="section-content">
+      <ul class="skill-list">
+        <li><strong>网页内容</strong> HTML5 结构、图片、链接。</li>
+        <li><strong>页面样式</strong> CSS3 字体、颜色、响应式布局。</li>
+        <li><strong>开发过程</strong> JavaScript、Git、检查与部署。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 作品门户 -->
+  <section class="section" id="works">
+    <h2 class="section-title">作品门户</h2>
+    <div class="section-content">
+      <p class="works-note">以下为教学示例，完成后可替换为自己的作品。</p>
+      <div class="works-grid">
+        <a class="work-card" href="https://你的作品网址1" target="_blank" rel="noopener">
+          <div class="work-thumb">点击查看</div>
+          <div class="work-name">作品名称一</div>
+        </a>
+        <a class="work-card" href="https://你的作品网址2" target="_blank" rel="noopener">
+          <div class="work-thumb">点击查看</div>
+          <div class="work-name">作品名称二</div>
+        </a>
+        <a class="work-card" href="https://你的作品网址3" target="_blank" rel="noopener">
+          <div class="work-thumb">点击查看</div>
+          <div class="work-name">作品名称三</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
 </body>
 </html>
